@@ -1,4 +1,3 @@
-// Personalized welcome message
 document.addEventListener("DOMContentLoaded", function() {
     const name = prompt("Please enter your name:");
     const welcomeText = document.getElementById("welcome-text");
@@ -7,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Form validation
 document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -17,9 +15,7 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
     let message = document.getElementById("message").value.trim();
     let output = document.getElementById("output");
 
-    // Email validation regex
     let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    // Phone validation regex
     let phonePattern = /^[0-9]{8,15}$/;
 
     if (!name || !email || !phone || !message) {
@@ -44,6 +40,6 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
         <p><strong>Message:</strong> ${message}</p>
     `;
 
-    // Reset form
     document.getElementById("contactForm").reset();
 });
+
