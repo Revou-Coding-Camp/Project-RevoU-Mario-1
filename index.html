@@ -71,6 +71,11 @@
     <p>© 2025 MyCompany. All Rights Reserved.</p>
   </footer>
 
-  <script src="/js/script.js"></script>
+  <script>
+    let userName = prompt("Please enter your name:");
+    if (userName) {
+      document.getElementById("welcome-text").textContent = "Hi " + userName + ", Welcome To Website";
+    }
+  </script>
 </body>
 </html>
