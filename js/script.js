@@ -1,51 +1,49 @@
-const text = ["Welcome to My Website!", "Explore My Projects", "Let’s Connect 🚀"];
-let count = 0;
-let index = 0;
-let currentText = "";
-let letter = "";
-const typingElement = document.querySelector(".hero h1");
+// Personalized welcome message
+document.addEventListener("DOMContentLoaded", function() {
+    const name = prompt("Please enter your name:");
+    const welcomeText = document.getElementById("welcome-text");
+    if (name) {
+        welcomeText.textContent = `Hi ${name}, Welcome To Website`;
+    }
+});
 
-function type() {
-  if (count === text.length) {
-    count = 0;
-  }
-  currentText = text[count];
-  letter = currentText.slice(0, ++index);
-
-  typingElement.textContent = letter;
-  if (letter.length === currentText.length) {
-    count++;
-    index = 0;
-    setTimeout(type, 2000); // jeda sebelum ganti teks
-  } else {
-    setTimeout(type, 120); // kecepatan mengetik
-  }
-}
-
-type();
-
-document.querySelectorAll("a[href^='#']").forEach(anchor => {
-  anchor.addEventListener("click", function (e) {
+// Form validation
+document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth"
-    });
-  });
-});
 
-const backToTop = document.createElement("button");
-backToTop.innerText = "↑";
-backToTop.classList.add("back-to-top");
-document.body.appendChild(backToTop);
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let message = document.getElementById("message").value.trim();
+    let output = document.getElementById("output");
 
-backToTop.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+    // Email validation regex
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    // Phone validation regex
+    let phonePattern = /^[0-9]{8,15}$/;
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    backToTop.style.display = "block";
-  } else {
-    backToTop.style.display = "none";
-  }
+    if (!name || !email || !phone || !message) {
+        alert("All fields are required!");
+        return;
+    }
+    if (!email.match(emailPattern)) {
+        alert("Please enter a valid email address!");
+        return;
+    }
+    if (!phone.match(phonePattern)) {
+        alert("Phone number must be 8-15 digits!");
+        return;
+    }
+
+    output.style.display = "block";
+    output.innerHTML = `
+        <h3>Form Submitted Successfully!</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Message:</strong> ${message}</p>
+    `;
+
+    // Reset form
+    document.getElementById("contactForm").reset();
 });
